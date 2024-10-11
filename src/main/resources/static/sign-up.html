@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Join Me</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	
+	<header>
+		 <nav>
+		     <img src="images/logo-transparent-png.png" alt="Join Me Logo" class="navbar-logo">
+		 </nav>
+	</header>
+    <h2>Create an Account</h2>
+    <form id="signupForm" action="/register" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <div id="responseMessage"></div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            fetch('http://localhost:8080/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('responseMessage').innerHTML = `
+                        Account created successfully! <br>
+                        <a href="/login.html">Please click here to login.</a>
+                    `;
+                } else {
+                    document.getElementById('responseMessage').innerText = 'Signup failed. Please try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseMessage').innerText = 'An error occurred. Please try again.';
+            });
+        });
+    </script>
+</body>
+</html>

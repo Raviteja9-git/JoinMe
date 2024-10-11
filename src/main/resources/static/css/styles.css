@@ -1,0 +1,154 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centering the content */
+    background-color: #4CAF50;
+    padding: 10px;
+    height: 70px; /* Ensure consistent height */
+}
+
+/* Ensuring logo is centered along with menu */
+ul {
+    list-style-type: none;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul li {
+    margin-left: 10px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: auto;
+    
+}
+
+ul li a:hover {
+    background-color: bisque;
+}
+
+/* Logo Style */
+.navbar-logo {
+    width: 80px; /* Increased size */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 15px; /* Adjust as needed */
+    display: block; /* Ensure it's displayed properly */
+}
+
+/* Consistent styles for headings and content */
+h1,h2, p {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Main container */
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Button Style */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 10px 0;
+    text-align: center;
+    color: white;
+}
+
+main {
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+form label {
+    margin-bottom: 5px;
+}
+
+form input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Container for available rides */
+#rides-container {
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.ride {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ride:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.ride p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.ride p strong {
+    color: #007bff;
+}

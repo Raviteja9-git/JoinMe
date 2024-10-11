@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Ride - Join Me</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<header>
+		       <nav>
+		           <img src="images/logo-transparent-png.png" alt="Join Me Logo" class="navbar-logo">
+		           <ul>
+		               <li><a href="index.html">Home</a></li>
+		               <li><a href="post-ride.html">Post a Ride</a></li>
+		               <li><a href="find-ride.html">Find a Ride</a></li>
+		           </ul>
+		       </nav>
+		   </header>
+    <main>
+        <section>
+            <h2>Offer a Ride</h2>
+            <form id="postRideForm">
+                <label for="origin">Origin:</label>
+                <input type="text" id="origin" name="origin" required>
+
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" required>
+
+                <label for="availableSeats">Available Seats:</label>
+                <input type="number" id="availableSeats" name="availableSeats" required>
+
+                <label for="departureTime">Departure Time:</label>
+                <input type="datetime-local" id="departureTime" name="departureTime" required>
+				
+				<label for="price">Price per Passenger:</label>
+				<input type="number" id="price" name="price" required>
+
+
+                <button type="submit">Post Ride</button>
+            </form>
+            <div id="responseMessage"></div>
+        </section>
+    </main>
+	<script>
+	        // Check if the user is authenticated before allowing them to post a ride
+	        if (!localStorage.getItem('authUser')) {
+	            window.location.href = 'login.html';  // Redirect to login page if not authenticated
+	        }
+	
+	 </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

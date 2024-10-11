@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Join Me</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <img src="images/logo-transparent-png.png" alt="Join Me Logo" class="navbar-logo">
+        </nav>
+    </header>
+
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="responseMessage"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const loginData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            // Making a POST request instead of GET to avoid browser login prompt
+            fetch('http://localhost:8080/users/login', {
+                method: 'POST', // Changed to POST to send the credentials in the body instead of Authorization header
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData) // Sending login data in the request body
+            })
+            .then(response => response.json()) // Expecting JSON response from backend
+            .then(data => {
+                if (data.success) {
+                    // User authenticated, redirect to the dashboard with Post Ride and Find Ride pages
+                    window.location.href = '/dashboard.html'; // Redirect to the dashboard page
+                } else {
+                    document.getElementById('responseMessage').innerText = 'Login failed: ' + data.message;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseMessage').innerText = 'An error occurred during login!';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Ride</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<header>
+		       <nav>
+		           <img src="images/logo-transparent-png.png" alt="Join Me Logo" class="navbar-logo">
+		           <ul>
+		               <li><a href="index.html">Home</a></li>
+		               <li><a href="post-ride.html">Post a Ride</a></li>
+		               <li><a href="find-ride.html">Find a Ride</a></li>
+		           </ul>
+		       </nav>
+	</header>
+
+    <h1>Find a Ride</h1>
+
+    <div id="search-form">
+        <form id="ride-form">
+            <label for="origin">Origin</label>
+            <input type="text" id="origin" name="origin" placeholder="Enter origin" required>
+
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
+
+            <button type="submit">Find Ride</button>
+        </form>
+    </div>
+
+    <div id="rides-container" class="container">
+        <!-- The rides will be dynamically inserted here -->
+    </div>
+
+    <script>
+		document.getElementById('ride-form').addEventListener('submit', function (e) {
+		    e.preventDefault(); // Prevent the form from submitting normally
+		
+		    const origin = document.getElementById('origin').value;
+		    const destination = document.getElementById('destination').value;
+		
+		    // Fetch rides from the backend API
+		    fetch(`http://localhost:8080/rides/search?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}`)
+		        .then(response => {
+		            if (!response.ok) {
+		                throw new Error('Network response was not ok');
+		            }
+		            return response.json();
+		        })
+		        .then(data => {
+		            const rideContainer = document.getElementById('rides-container');
+		            rideContainer.innerHTML = ''; // Clear previous results
+		
+		            // Check if any rides were found
+		            if (data.length === 0) {
+		                rideContainer.innerHTML = '<p>No rides found for this route.</p>';
+		            } else {
+		                // Display each ride dynamically
+		                data.forEach(ride => {
+		                    const rideElement = `
+		                        <div class="ride">
+		                            <p><strong>Origin:</strong> ${ride.origin}</p>
+		                            <p><strong>Destination:</strong> ${ride.destination}</p>
+		                            <p><strong>Seats Available:</strong> ${ride.availableSeats}</p>
+		                            <p><strong>Price:</strong> ${ride.price}</p>
+									<p><strong>Departure Time:</strong> ${ride.departureTime}</p>
+		                        </div>
+		                    `;
+		                    rideContainer.innerHTML += rideElement;
+		                });
+		            }
+		        })
+		        .catch(error => {
+		            console.error('Error fetching rides:', error);
+		        });
+		});
+
+    </script>
+</body>
+</html>
